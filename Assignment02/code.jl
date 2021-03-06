@@ -19,8 +19,11 @@ using HTTP
 # ╔═╡ 06824840-7cad-11eb-031c-557c08c73dda
 using Dates
 
-# ╔═╡ f3ecdf42-7ca4-11eb-28db-e5b75002643d
-using Plots
+# ╔═╡ 6a0f8270-7eaf-11eb-0bd4-b734f60b666e
+begin
+	using Plots
+	plotlyjs()
+end
 
 # ╔═╡ dbb1e640-7a7a-11eb-1c2c-55a1d675e952
 md"# Assignment - 02"
@@ -258,7 +261,7 @@ plot_covid
 
 # ╔═╡ 75ca0000-7ca6-11eb-2812-3f4ee8f7b544
 begin
-	plot(plot_covid.dateymd, plot_covid.C, title = "Covid-Cases", label = "Confirmed")
+	plot(plot_covid.dateymd, plot_covid.C, title = "Covid-Cases", label = "Confirmed", xrotation = 20)
 	plot!(plot_covid.dateymd, plot_covid.D, label = "Deceased")
 	plot!(plot_covid.dateymd, plot_covid.R, label = "Recovered")
 	xlabel!("Date")
@@ -267,7 +270,7 @@ end
 
 # ╔═╡ 108cadd0-7cb2-11eb-2765-db5c2ac1e9f9
 begin
-	plot(plot_covid.dateymd, plot_covid.Confirmed, title = "Covid-Cases moving Average", label = "Confirmed")
+	plot(plot_covid.dateymd, plot_covid.Confirmed, title = "Covid-Cases moving Average", label = "Confirmed",xrotation = 20)
 	plot!(plot_covid.dateymd, plot_covid.Deceased, label = "Deceased")
 	plot!(plot_covid.dateymd, plot_covid.Recovered, label = "Recovered")
 	xlabel!("Date")
@@ -276,17 +279,39 @@ end
 
 # ╔═╡ dca464f0-7cdd-11eb-24cc-e9f37f0e0b1f
 begin
-	p1 = plot(plot_covid.dateymd, plot_covid.C, title = "Covid-Cases", label = "Confirmed")
-	p2 = plot(plot_covid.dateymd, plot_covid.Confirmed, title = "Moving average", label = "Confirmed")
-	p3 = plot(plot_covid.dateymd, plot_covid.D, label = "Deceased")
-	p4 = plot(plot_covid.dateymd, plot_covid.Deceased, label = "Deceased")
-	p5 = plot(plot_covid.dateymd, plot_covid.R, label = "Recovered")
-	p6 = plot(plot_covid.dateymd, plot_covid.Recovered, label = "Recovered")
-	plot(p1,p2,p3,p4,p5,p6, layout = (3,2), legend = false)
+	p1 = plot(plot_covid.dateymd, plot_covid.C, label = "Confirmed cases", linecolor = :orange, xrotation = 20)
+	p2 = plot(plot_covid.dateymd, plot_covid.Confirmed,  label = "moving average",xrotation = 20)
+	plot(p1,p2, layout = (2,1))
+	xlabel!("Date")
+	ylabel!("Number of Cases")
+end
+
+# ╔═╡ 45f7c8f2-7eb1-11eb-2ef0-5dfafce69c7c
+md"1.Confirmed cases  "
+
+# ╔═╡ 983e7e50-7ea8-11eb-33a1-91844d88c47f
+begin
+	p3 = plot(plot_covid.dateymd, plot_covid.D, label = "Deceased cases", linecolor = :purple, xrotation = 20)
+		p4 = plot(plot_covid.dateymd, plot_covid.Deceased, label = "Moving average")
+		plot(p3,p4, layout = (2,1), xrotation = 20)
+	xlabel!("Date")
+	ylabel!("Number of Cases")
+end
+
+# ╔═╡ 3c174040-7eb1-11eb-0d29-fb40cc10175c
+md"2.Deceased cases  "
+
+# ╔═╡ 9968cd80-7ea8-11eb-3f80-b5fadb84a990
+begin	
+	p5 = plot(plot_covid.dateymd, plot_covid.R, label = "Recovered",linecolor = :green, xrotation = 20)
+	p6 = plot(plot_covid.dateymd, plot_covid.Recovered, label= "Moving average", xrotation = 20)
+	plot(p5,p6, layout = (2,1))
+	xlabel!("Date")
+	ylabel!("Number of Cases")
 end
 
 # ╔═╡ bedef340-7e5e-11eb-0eb5-87daf8258dca
-md"1.Confirmed cases  2.Deceased cases  3.Recovered cases
+md"3.Recovered cases
 "
 
 # ╔═╡ Cell order:
@@ -340,7 +365,7 @@ md"1.Confirmed cases  2.Deceased cases  3.Recovered cases
 # ╠═40b0d910-7ca2-11eb-14ec-5d7a8b93f5a0
 # ╟─c603ca30-7ca4-11eb-28d3-610f338c2971
 # ╟─bce028e0-7ca4-11eb-1471-3fb028c89c39
-# ╠═f3ecdf42-7ca4-11eb-28db-e5b75002643d
+# ╠═6a0f8270-7eaf-11eb-0bd4-b734f60b666e
 # ╠═1c12c9d0-7caa-11eb-1f0d-1da3b950b1cb
 # ╠═3a6b8870-7cb6-11eb-1c52-534bb2a82792
 # ╠═a12b5af0-7cb5-11eb-1e4c-25a6ab392010
@@ -350,4 +375,8 @@ md"1.Confirmed cases  2.Deceased cases  3.Recovered cases
 # ╠═75ca0000-7ca6-11eb-2812-3f4ee8f7b544
 # ╠═108cadd0-7cb2-11eb-2765-db5c2ac1e9f9
 # ╠═dca464f0-7cdd-11eb-24cc-e9f37f0e0b1f
-# ╟─bedef340-7e5e-11eb-0eb5-87daf8258dca
+# ╟─45f7c8f2-7eb1-11eb-2ef0-5dfafce69c7c
+# ╠═983e7e50-7ea8-11eb-33a1-91844d88c47f
+# ╠═3c174040-7eb1-11eb-0d29-fb40cc10175c
+# ╠═9968cd80-7ea8-11eb-3f80-b5fadb84a990
+# ╠═bedef340-7e5e-11eb-0eb5-87daf8258dca
