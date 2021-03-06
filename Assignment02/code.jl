@@ -57,7 +57,7 @@ md" Figure 1(a): Untidy data"
 
 
 # ╔═╡ ff8157b0-7cdf-11eb-3b6e-6d3d4eb0b508
-Tidy_Data = stack(untidy_data, 2:11, variable_name = :Income, value_name = :Frequency)
+Tidy_Data = DataFrames.stack(untidy_data, 2:11, variable_name = :Income, value_name = :Frequency)
 
 # ╔═╡ f0d2b210-7aa3-11eb-21e0-1552ca1899c9
 sort(Tidy_Data, [1])
@@ -110,7 +110,7 @@ df1 = DataFrame(
 md"Figure 2(a): Untidy data"
 
 # ╔═╡ d4f1be80-7ac9-11eb-0062-9769f10db702
-df2 = dropmissing(stack(df1, 5:35))
+df2 = dropmissing(DataFrames.stack(df1, 5:35))
 
 # ╔═╡ 4f8234f0-7ad8-11eb-3f2b-2d214387a590
 df2[!, "day"] = getindex.(string.(df2.variable), Ref(2:3))
@@ -134,7 +134,7 @@ md"Figure 2(b): Tidy data"
 md"#### Problem 03"
 
 # ╔═╡ b39623e0-7b30-11eb-36d4-65c1df7006c3
-billboard = sort(CSV.read("C:\\Users\\Admin\\Desktop\\JULIA\\Assignment2\\Billboard.csv", DataFrame), 2)
+billboard = sort(CSV.read("C:\\Users\\Admin\\Desktop\\JULIA\\Assignment1\\Assignment02\\Billboard.csv", DataFrame), 2)
 
 # ╔═╡ a0981cf0-7b47-11eb-33bd-fbdd3583c463
 md"Figure 3(a): Untidy data"
@@ -146,7 +146,7 @@ insertcols!(billboard, 1, :id => 1:317, makeunique=true)
 b1 = billboard[!, [1,2,3,4,5,7,9,10,11,12,13,14,15,16,17,18]]
 
 # ╔═╡ 619c126e-7b3a-11eb-019c-418fb3c49900
-b2 = sort(stack(b1, 7:16, variable_name = :week, value_name = :rank), 3)
+b2 = sort(DataFrames.stack(b1, 7:16, variable_name = :week, value_name = :rank), 3)
 
 # ╔═╡ 979bd030-7b3b-11eb-0b84-ed315decd42c
 b3 = unique(b2[!,[ :id,:artist, :track, :time]])
@@ -232,9 +232,9 @@ end
 
 # ╔═╡ a12b5af0-7cb5-11eb-1e4c-25a6ab392010
 begin
-	moving_avg_C = [0.0 for _ in 1:399]
-	moving_avg_D = [0.0 for _ in 1:399]
-	moving_avg_R = [0.0 for _ in 1:399]
+	moving_avg_C = [0.0 for _ in 1:length(plot_covid.C)]
+	moving_avg_D = [0.0 for _ in 1:length(plot_covid.D)]
+	moving_avg_R = [0.0 for _ in 1:length(plot_covid.R)]
 end
 
 # ╔═╡ b7be1a30-7cc6-11eb-285a-090e236cb806
@@ -290,6 +290,10 @@ begin
 	plot(p1,p2,p3,p4,p5,p6, layout = (3,2), legend = false)
 end
 
+# ╔═╡ bedef340-7e5e-11eb-0eb5-87daf8258dca
+md"1.Confirmed cases  2.Deceased cases  3.Recovered cases
+"
+
 # ╔═╡ Cell order:
 # ╟─dbb1e640-7a7a-11eb-1c2c-55a1d675e952
 # ╟─38db6300-7a7b-11eb-3dc6-df1675729ce2
@@ -312,7 +316,7 @@ end
 # ╟─826d389e-7ad9-11eb-15ee-0d0ed9d6ac3f
 # ╟─91b995ae-7b24-11eb-136a-6586f2224f10
 # ╟─d166d9b0-7b2f-11eb-1b25-a78253a1bf13
-# ╟─b39623e0-7b30-11eb-36d4-65c1df7006c3
+# ╠═b39623e0-7b30-11eb-36d4-65c1df7006c3
 # ╟─a0981cf0-7b47-11eb-33bd-fbdd3583c463
 # ╟─373046d0-7b46-11eb-01e4-8fb1c1b29ef8
 # ╠═41b36400-7b39-11eb-0a12-2120db5658fb
@@ -351,3 +355,4 @@ end
 # ╠═75ca0000-7ca6-11eb-2812-3f4ee8f7b544
 # ╠═108cadd0-7cb2-11eb-2765-db5c2ac1e9f9
 # ╠═dca464f0-7cdd-11eb-24cc-e9f37f0e0b1f
+# ╟─bedef340-7e5e-11eb-0eb5-87daf8258dca
