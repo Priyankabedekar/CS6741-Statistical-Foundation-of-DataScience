@@ -20,10 +20,7 @@ using HTTP
 using Dates
 
 # ╔═╡ f3ecdf42-7ca4-11eb-28db-e5b75002643d
-begin
-	using Plots, Statistics
-	gr()
-end
+using Plots
 
 # ╔═╡ dbb1e640-7a7a-11eb-1c2c-55a1d675e952
 md"# Assignment - 02"
@@ -238,14 +235,12 @@ begin
 end
 
 # ╔═╡ b7be1a30-7cc6-11eb-285a-090e236cb806
-for i in 7:399
+for i in 7:length(plot_covid.C)
 	mean = 0.0
 	mean = (conf[i-6] + conf[i-5] + conf[i-4] + conf[i-3] + conf[i-2] + conf[i-1] + 			  conf[i])/7
     moving_avg_C[i] = mean
-	mean = 0.0
 	mean = (Dece[i-6] + Dece[i-5] + Dece[i-4] + Dece[i-3] + Dece[i-2] + Dece[i-1] + 			  Dece[i])/7
     moving_avg_D[i] = mean
-	mean = 0.0
 	mean = (Recov[i-6] + Recov[i-5] + Recov[i-4] + Recov[i-3] + Recov[i-2] + Recov[i-1] + 			  Recov[i])/7
     moving_avg_R[i] = mean
 end
